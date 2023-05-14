@@ -13,7 +13,9 @@ WORKDIR /usr/src/app
 COPY --chown=node:node package*.json ./
 
 # Install app dependencies using the `npm ci` command instead of `npm install`
-RUN npm ci
+RUN apk add g++ make py3-pip
+RUN npm install
+RUN npm rebuild bcrypt --build-from-source
 
 # Bundle app source
 COPY --chown=node:node . .
